@@ -9,7 +9,7 @@ import { useFrame } from 'react-three-fiber'
 export default function ClassicDuck({ ...props }) {
   const group = useRef()
 
-  const { nodes, materials } = useGLTF('/Pato.glb')
+  const { nodes, materials } = useGLTF(props.path)
   return (
     <group ref={group} {...props} dispose={null}>
       <group scale={5}>
