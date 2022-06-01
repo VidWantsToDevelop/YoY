@@ -6,23 +6,30 @@ import Subary from './Subary'
 import PostDuck from './PostDuck'
 import { Section } from './section'
 
-import { Html, OrbitControls } from '@react-three/drei'
+import { Html, OrbitControls, useProgress } from '@react-three/drei'
 
 function CanvasArea(props) {
   return (
     <div className='canvasArea'>
       <div className='canvasWrapper'>
-        <CanvasBox />
+        <CanvasBox model={props.model} handler={props.handler} />
       </div>
       <div className='container'>
         <h1 className='title'>{props.duckName}</h1>
         <div className='amountBar'>
           <div>
-            <h5 className='amountManage'>-</h5>
+            <h5 className='amountManage' onClick={(e) => manageAmount(e, true)}>
+              -
+            </h5>
           </div>
           <p className='counter'>0</p>
           <div>
-            <h5 className='amountManage'>+</h5>
+            <h5
+              className='amountManage'
+              onClick={(e) => manageAmount(e, false)}
+            >
+              +
+            </h5>
           </div>
         </div>
         <button>Add to cart</button>
@@ -31,21 +38,39 @@ function CanvasArea(props) {
   )
 }
 
-const CanvasBox = () => {
+const CanvasBox = (props) => {
   return (
-    <section>
+    <section onClick={() => props.handler(null, props.model)}>
       <Canvas
         style={{ backgroundColor: 'transparent', borderRadius: '25px' }}
         camera={{ position: [0, 0, 120], fov: 70 }}
         className='groupWrapper'
       >
         <Lights />
-        <Suspense fallback={null} r3f>
-          <HtmlPart posY={250} component={<PostDuck />}></HtmlPart>
+        <Suspense fallback={<Loading />} r3f>
+          <HtmlPart posY={250} component={props.model}></HtmlPart>
         </Suspense>
       </Canvas>
     </section>
   )
 }
 
-export { CanvasArea, CanvasBox }
+const Loading = () => {
+  const { progress } = useProgress()
+  return (
+    <Html style={{ color: 'white' }} center>
+      {Math.round(progress)} % loaded
+    </Html>
+  )
+}
+
+//Functions
+
+const manageAmount = (e, isSubtraction) => {
+  if (isSubtraction) {
+    if (e.target.parentNode.nextElementSibling.innerText > 0)
+      e.target.parentNode.nextElementSibling.innerText--
+  } else e.target.parentNode.previousElementSibling.innerText++
+}
+
+export { CanvasArea, CanvasBox, Loading }
