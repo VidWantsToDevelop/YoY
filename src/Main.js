@@ -6,7 +6,9 @@ import Lights from './components/Lights'
 import { CanvasArea } from './components/Canvas'
 import Subary from './components/Subary'
 import PostDuck from './components/PostDuck'
+import HappyDuck from './components/HappyDuck'
 import Modal from './components/Modal'
+import { Data } from './Data/DummyData'
 
 import { Html, OrbitControls } from '@react-three/drei'
 
@@ -15,46 +17,36 @@ const Main = () => {
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
 
-  const modalHandler = (e, model) => {
+  const modalHandler = (e, duck) => {
     if (e) {
       if (e.target === e.currentTarget) setIsShown(!modalIsShown)
     } else {
       console.log('handler')
+      setModel(duck)
       setIsShown(!modalIsShown)
-      setModel(model)
     }
   }
 
   return (
     <main>
       <Header />
-      <Modal isShown={modalIsShown} model={modalModel} handler={modalHandler} />
+      <Modal
+        isShown={modalIsShown}
+        duck={modalModel ? modalModel : 1}
+        handler={modalHandler}
+      />
       <div className='canvasArea-div'>
-        <CanvasArea
-          duckName='Merry'
-          model={<Subary />}
-          handler={modalHandler}
-        />
-        <CanvasArea
-          duckName='Joseph'
-          model={<PostDuck />}
-          handler={modalHandler}
-        />
-        <CanvasArea
-          duckName='David'
-          model={<PostDuck />}
-          handler={modalHandler}
-        />
-        <CanvasArea
-          duckName='Arthur'
-          model={<PostDuck />}
-          handler={modalHandler}
-        />
-        <CanvasArea
-          duckName='Antonio'
-          model={<PostDuck />}
-          handler={modalHandler}
-        />
+        {Data.map(({ duckName, description, model }) => {
+          return (
+            <CanvasArea
+              duckName={duckName}
+              model={model}
+              handler={modalHandler}
+              description={description}
+              isModal={false}
+            />
+          )
+        })}
       </div>
     </main>
   )

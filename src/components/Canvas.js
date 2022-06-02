@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useRef, useEffect, useState } from 'react'
 import HtmlPart from './HtmlPart'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Lights from './Lights'
@@ -7,12 +7,13 @@ import PostDuck from './PostDuck'
 import { Section } from './section'
 
 import { Html, OrbitControls, useProgress } from '@react-three/drei'
+import { render } from '@testing-library/react'
 
 function CanvasArea(props) {
   return (
     <div className='canvasArea'>
       <div className='canvasWrapper'>
-        <CanvasBox model={props.model} handler={props.handler} />
+        <CanvasBox duck={props} />
       </div>
       <div className='container'>
         <h1 className='title'>{props.duckName}</h1>
@@ -39,8 +40,16 @@ function CanvasArea(props) {
 }
 
 const CanvasBox = (props) => {
+  const ref = useRef()
+
   return (
-    <section onClick={() => props.handler(null, props.model)}>
+    <section
+      onClick={(e) => {
+        props.duck.handler(null, props.duck)
+        console.log(e.target)
+        render()
+      }}
+    >
       <Canvas
         style={{ backgroundColor: 'transparent', borderRadius: '25px' }}
         camera={{ position: [0, 0, 120], fov: 70 }}
@@ -48,7 +57,11 @@ const CanvasBox = (props) => {
       >
         <Lights />
         <Suspense fallback={<Loading />} r3f>
-          <HtmlPart posY={250} component={props.model}></HtmlPart>
+          <HtmlPart
+            posY={250}
+            component={props.duck.model}
+            isModal={false}
+          ></HtmlPart>
         </Suspense>
       </Canvas>
     </section>
