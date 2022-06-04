@@ -2,9 +2,7 @@ import React, { Suspense, useRef, useEffect, useState } from 'react'
 import HtmlPart from './HtmlPart'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Lights from './Lights'
-import Subary from './Subary'
-import PostDuck from './PostDuck'
-import { Section } from './section'
+import { Notification, Color } from './Notification'
 
 import { Html, OrbitControls, useProgress } from '@react-three/drei'
 import { render } from '@testing-library/react'
@@ -15,7 +13,7 @@ function CanvasArea(props) {
       <div className='canvasWrapper'>
         <CanvasBox duck={props} />
       </div>
-      <div className='container'>
+      <div className='containerC'>
         <h1 className='title'>{props.duckName}</h1>
         <div className='amountBar'>
           <div>
@@ -23,7 +21,9 @@ function CanvasArea(props) {
               -
             </h5>
           </div>
-          <p className='counter'>0</p>
+          <p className='counter' id={`counter_${props.index}`}>
+            0
+          </p>
           <div>
             <h5
               className='amountManage'
@@ -33,7 +33,12 @@ function CanvasArea(props) {
             </h5>
           </div>
         </div>
-        <button>Add to cart</button>
+        <button
+          onClick={(e) => props.createNotification(Color.info)}
+          id={`button_${props.index}`}
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   )
@@ -46,7 +51,7 @@ const CanvasBox = (props) => {
     <section
       onClick={(e) => {
         props.duck.handler(null, props.duck)
-        console.log(e.target)
+
         render()
       }}
     >
@@ -86,4 +91,27 @@ const manageAmount = (e, isSubtraction) => {
   } else e.target.parentNode.previousElementSibling.innerText++
 }
 
+const addToCart = (e, notificationsP) => {
+  const index = e.target.id.replace('button_', '')
+  const amount = document.querySelector(`#counter_${index}`).innerHTML
+
+  const [notifications, setNotifications] = [...notificationsP]
+
+  document.querySelector('.notifications').style.display = 'flex'
+
+  const key = new Date().getTime().toString()
+  console.log(key)
+
+  setNotifications(
+    notifications.concat(
+      <Notification
+        counter={notifications.length + 1}
+        amount={amount}
+        reducer={setNotifications}
+        array={notifications}
+        key={key}
+      />
+    )
+  )
+}
 export { CanvasArea, CanvasBox, Loading }

@@ -1,14 +1,11 @@
 import React, { Suspense, useRef, useState } from 'react'
 import Header from './components/header'
-import HtmlPart from './components/HtmlPart'
-import { Canvas, useFrame } from '@react-three/fiber'
-import Lights from './components/Lights'
 import { CanvasArea } from './components/Canvas'
-import Subary from './components/Subary'
-import PostDuck from './components/PostDuck'
-import HappyDuck from './components/HappyDuck'
+
 import Modal from './components/Modal'
 import { Data } from './Data/DummyData'
+import { Notification } from './components/Notification'
+import styles from './App.scss'
 
 import { Html, OrbitControls } from '@react-three/drei'
 
@@ -16,6 +13,15 @@ const Main = () => {
   const refGroup = useRef()
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
+  const [notifications, setNotifications] = useState([])
+
+  const createNotification = (color) =>
+    setNotifications([...notifications, { color, id: notifications.length }])
+  console.log(notifications)
+
+  const deleteNotification = (key) => {
+    setNotifications(notifications.filter(({ id, color }) => id !== key))
+  }
 
   const modalHandler = (e, duck) => {
     if (e) {
@@ -35,8 +41,19 @@ const Main = () => {
         duck={modalModel ? modalModel : 1}
         handler={modalHandler}
       />
+      {notifications.map(({ id, color }) => {
+        return (
+          <Notification
+            key={id}
+            color={color}
+            deleteMethod={() => deleteNotification(id)}
+          >
+            <>Hello brand new world</>
+          </Notification>
+        )
+      })}
       <div className='canvasArea-div'>
-        {Data.map(({ duckName, description, model }) => {
+        {Data.map(({ duckName, description, model }, index) => {
           return (
             <CanvasArea
               duckName={duckName}
@@ -44,6 +61,9 @@ const Main = () => {
               handler={modalHandler}
               description={description}
               isModal={false}
+              key={index}
+              index={index}
+              createNotification={createNotification}
             />
           )
         })}
