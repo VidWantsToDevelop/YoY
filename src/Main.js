@@ -15,8 +15,11 @@ const Main = () => {
   const [modalModel, setModel] = useState(null)
   const [notifications, setNotifications] = useState([])
 
-  const createNotification = (color) =>
-    setNotifications([...notifications, { color, id: notifications.length }])
+  const createNotification = (color, children) =>
+    setNotifications([
+      ...notifications,
+      { color, id: notifications.length, children },
+    ])
   console.log(notifications)
 
   const deleteNotification = (key) => {
@@ -41,14 +44,14 @@ const Main = () => {
         duck={modalModel ? modalModel : 1}
         handler={modalHandler}
       />
-      {notifications.map(({ id, color }) => {
+      {notifications.map(({ id, color, children }) => {
         return (
           <Notification
             key={id}
             color={color}
             deleteMethod={() => deleteNotification(id)}
           >
-            <>Hello brand new world</>
+            <>{children}</>
           </Notification>
         )
       })}

@@ -67,7 +67,23 @@ const Modal = (props) => {
                   </h5>
                 </div>
               </div>
-              <button>Add to cart</button>
+              <button
+                onClick={(e) => {
+                  const amount = document.querySelector(
+                    '#counter_' + props.index
+                  ).innerText
+                  if (amount != 0) {
+                    props.createNotification(
+                      'success',
+                      `${amount}x ${props.duckName} have been added to your cart`
+                    )
+                  } else {
+                    props.createNotification('error', `Invalid amount of items`)
+                  }
+                }}
+              >
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

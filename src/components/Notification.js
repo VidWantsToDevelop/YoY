@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import styles from '../App.scss'
+import Animations from '../Animations.scss'
 import { createPortal } from 'react-dom'
 
 const createContainer = () => {
@@ -24,12 +24,39 @@ const createContainer = () => {
 const container = createContainer()
 
 const Notification = ({ color = Color.info, deleteMethod, children }) => {
+  const [closing, setClosing] = useState(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setClosing(true), 5000)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (closing) {
+      const timeout = setTimeout(deleteMethod, 300)
+
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, [closing, deleteMethod])
+
   return createPortal(
-    <div className={`notification ${color}`}>
-      {children}
-      <button className='closeButton' onClick={deleteMethod}>
-        <div>X</div>
-      </button>
+    <div className={'notify-container ' + (closing ? 'shrink' : void 0)}>
+      <div className={`notification ${color} ` + (closing ? 'out' : 'in')}>
+        {children}
+        <button
+          className='closeButton'
+          onClick={async (e) => {
+            setClosing(true)
+          }}
+        >
+          <div>X</div>
+        </button>
+      </div>
     </div>,
     container
   )

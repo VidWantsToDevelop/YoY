@@ -1,0 +1,27 @@
+@keyframes in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes out {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
+
+.notification.in {
+  animation: in 0.3s ease-in-out;
+}
+
+.notification.out {
+  transform: translateX(150%);
+  flex: 0;
+}

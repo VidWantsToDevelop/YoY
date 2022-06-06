@@ -34,7 +34,19 @@ function CanvasArea(props) {
           </div>
         </div>
         <button
-          onClick={(e) => props.createNotification(Color.info)}
+          onClick={(e) => {
+            const amount = document.querySelector(
+              '#counter_' + props.index
+            ).innerText
+            if (amount != 0) {
+              props.createNotification(
+                Color.success,
+                `${amount}x ${props.duck.duckName} have been added to your cart`
+              )
+            } else {
+              props.createNotification(Color.error, `Invalid amount of items`)
+            }
+          }}
           id={`button_${props.index}`}
         >
           Add to cart
