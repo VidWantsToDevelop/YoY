@@ -265,7 +265,7 @@ canvas {
 
 .modalArea {
   position: fixed;
-  z-index: 999;
+  z-index: 100;
   height: 100%;
   width: 100vw;
   display: flex;
@@ -338,7 +338,7 @@ canvas {
 }
 
 #notifyContainer {
-  z-index: 99;
+  z-index: 999;
 }
 
 .notification:not(:last-child) {
@@ -387,6 +387,7 @@ canvas {
   overflow: hidden;
   max-height: 200px;
   transition: 0.3s ease-out;
+  z-index: 9999;
 }
 
 .notify-container:not(:last-child) {

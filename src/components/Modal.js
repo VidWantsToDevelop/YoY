@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
 import { Loading } from './Canvas'
-import PostDuck from './PostDuck'
 import Lights from './Lights'
 
 const Modal = (props) => {
@@ -57,7 +56,7 @@ const Modal = (props) => {
                     -
                   </h5>
                 </div>
-                <p className='counter'>0</p>
+                <p className='counter-modal'>0</p>
                 <div>
                   <h5
                     className='amountManage'
@@ -69,13 +68,12 @@ const Modal = (props) => {
               </div>
               <button
                 onClick={(e) => {
-                  const amount = document.querySelector(
-                    '#counter_' + props.index
-                  ).innerText
+                  const amount =
+                    document.querySelector('.counter-modal').innerText
                   if (amount != 0) {
                     props.createNotification(
                       'success',
-                      `${amount}x ${props.duckName} have been added to your cart`
+                      `${amount}x ${props.duck.duckName} have been added to your cart`
                     )
                   } else {
                     props.createNotification('error', `Invalid amount of items`)

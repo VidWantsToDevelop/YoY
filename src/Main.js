@@ -43,6 +43,7 @@ const Main = () => {
         isShown={modalIsShown}
         duck={modalModel ? modalModel : 1}
         handler={modalHandler}
+        createNotification={createNotification}
       />
       {notifications.map(({ id, color, children }) => {
         return (
