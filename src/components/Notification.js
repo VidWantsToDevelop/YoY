@@ -15,7 +15,7 @@ const createContainer = () => {
 
   element = document.createElement('div')
   element.setAttribute('id', portalId)
-  element.className = 'container'
+  element.className = 'containerN'
   document.body.appendChild(element)
   console.log(3)
   return element
@@ -27,7 +27,7 @@ const Notification = ({ color = Color.info, deleteMethod, children }) => {
   const [closing, setClosing] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setClosing(true), 5000)
+    const timeout = setTimeout(() => setClosing(true), 505000)
 
     return () => {
       clearTimeout(timeout)

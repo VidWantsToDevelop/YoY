@@ -5,12 +5,15 @@ import { CanvasArea } from './components/Canvas'
 import Modal from './components/Modal'
 import { Data } from './Data/DummyData'
 import { Notification } from './components/Notification'
+import { States } from './Context/Context'
 import styles from './App.scss'
 
 import { Html, OrbitControls } from '@react-three/drei'
 
 const Main = () => {
-  const refGroup = useRef()
+  const { state } = States()
+
+  console.log(state['products'])
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
   const [notifications, setNotifications] = useState([])
@@ -57,20 +60,23 @@ const Main = () => {
         )
       })}
       <div className='canvasArea-div'>
-        {Data.map(({ duckName, description, model }, index) => {
-          return (
-            <CanvasArea
-              duckName={duckName}
-              model={model}
-              handler={modalHandler}
-              description={description}
-              isModal={false}
-              key={index}
-              index={index}
-              createNotification={createNotification}
-            />
-          )
-        })}
+        {state.products.map(
+          ({ id, duckName, description, model, price }, index) => {
+            return (
+              <CanvasArea
+                duckName={duckName}
+                model={model}
+                handler={modalHandler}
+                description={description}
+                isModal={false}
+                key={id}
+                price={price}
+                index={index}
+                createNotification={createNotification}
+              />
+            )
+          }
+        )}
       </div>
     </main>
   )
