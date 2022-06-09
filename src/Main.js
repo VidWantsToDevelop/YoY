@@ -41,7 +41,6 @@ const Main = () => {
 
   return (
     <main>
-      <Header />
       <Modal
         isShown={modalIsShown}
         duck={modalModel ? modalModel : 1}
@@ -70,6 +69,7 @@ const Main = () => {
                 description={description}
                 isModal={false}
                 key={id}
+                id={id}
                 price={price}
                 index={index}
                 createNotification={createNotification}

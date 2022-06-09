@@ -14,6 +14,7 @@ body {
 html,
 main,
 body,
+.cartBody,
 #root {
   width: 100%;
   height: 100%;
@@ -94,10 +95,7 @@ h5 {
 header {
   z-index: 3;
   width: 100%;
-  height: 250px;
-
-  padding: 60px;
-  padding-top: 150px;
+  padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -440,4 +438,44 @@ canvas {
 
 .shrink {
   max-height: 0;
+}
+
+/* More of cart styling */
+
+.cartItem-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartItem {
+  display: flex;
+  padding: 10px 15px;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.cartItem h5,
+h4 {
+  margin: auto 2px;
+  font-size: 1.2em;
+}
+
+.cartItem > svg {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.cartBody {
+  display: flex;
+  justify-content: center;
+}
+
+.cartProducts,
+.cartSummary {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }

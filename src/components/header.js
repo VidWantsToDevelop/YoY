@@ -1,11 +1,14 @@
 import React from 'react'
 import { States } from '../Context/Context'
+import { Link } from 'react-router-dom'
 import { AiOutlineShoppingCart as CartIcon } from 'react-icons/ai'
+import { RiDeleteBack2Line } from 'react-icons/ri'
 import * as RB from 'react-bootstrap'
 
 export default function Header() {
   const {
     state: { cart },
+    dispatch,
   } = States()
 
   return (
@@ -15,13 +18,13 @@ export default function Header() {
         <nav>
           <ul>
             <li>
-              <a href='/'>home</a>
+              <Link to='/'>home</Link>
             </li>
             <li>
               <a href='/'>duck market</a>
             </li>
             <li>
-              <a href='/'>about</a>
+              <Link to='/cart'>Cart</Link>
             </li>
             <li className='cartBtn'>
               <RB.Container>
@@ -35,8 +38,20 @@ export default function Header() {
                       cart.map((el) => {
                         return (
                           <div className='cartItem-wrapper' key={el.id}>
-                            <h5>{el.duckName}</h5>
-                            <h4>{el.price}</h4>
+                            <div className='cartItem'>
+                              <h5>{el.duckName}</h5>
+                              <h5>{el.price}</h5>
+                              <RiDeleteBack2Line
+                                onClick={() => {
+                                  console.log("'((((((' + ")
+                                  console.log(cart)
+                                  dispatch({
+                                    type: 'CART_REMOVE',
+                                    payload: el,
+                                  })
+                                }}
+                              />
+                            </div>
                           </div>
                         )
                       })
