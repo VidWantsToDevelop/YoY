@@ -3,7 +3,30 @@ import React from 'react'
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CART_ADD':
-      return { ...state, cart: [...state.cart, { ...action.payload, qty: 1 }] }
+      return {
+        ...state,
+        cart: [...state.cart, { ...action.payload, qty: action.payload.qty }],
+      }
+
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        cart: state.cart.filter((e) =>
+          e.id === action.payload.id
+            ? (e.qty = e.qty + action.payload.qty)
+            : e.qty
+        ),
+      }
+
+    case 'DELETE_ITEM':
+      return {
+        ...state,
+        cart: state.cart.filter((e) =>
+          e.id === action.payload.id
+            ? (e.qty = e.qty - action.payload.qty)
+            : e.qty
+        ),
+      }
 
     case 'CART_REMOVE':
       return {

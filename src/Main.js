@@ -59,24 +59,24 @@ const Main = () => {
         )
       })}
       <div className='canvasArea-div'>
-        {state.products.map(
-          ({ id, duckName, description, model, price }, index) => {
-            return (
-              <CanvasArea
-                duckName={duckName}
-                model={model}
-                handler={modalHandler}
-                description={description}
-                isModal={false}
-                key={id}
-                id={id}
-                price={price}
-                index={index}
-                createNotification={createNotification}
-              />
-            )
-          }
-        )}
+        {state.products.map((el, index) => {
+          let { id, duckName, description, model, price } = el
+          return (
+            <CanvasArea
+              duckName={duckName}
+              model={model}
+              handler={modalHandler}
+              description={description}
+              isModal={false}
+              key={id}
+              id={id}
+              price={price}
+              index={index}
+              duck={el}
+              createNotification={createNotification}
+            />
+          )
+        })}
       </div>
     </main>
   )

@@ -39,8 +39,10 @@ export default function Header() {
                         return (
                           <div className='cartItem-wrapper' key={el.id}>
                             <div className='cartItem'>
-                              <h5>{el.duckName}</h5>
-                              <h5>{el.price}</h5>
+                              <h5>
+                                {el.duckName} ({el.qty})
+                              </h5>
+                              <h5>${el.price * el.qty}</h5>
                               <RiDeleteBack2Line
                                 onClick={() => {
                                   console.log("'((((((' + ")

@@ -48,14 +48,25 @@ function CanvasArea(props) {
               '#counter_' + props.index
             ).innerText
             if (amount != 0) {
-              try {
+              if (cart.filter((el) => el.duckName === props.duckName).length) {
                 dispatch({
-                  type: 'CART_ADD',
-                  payload: props,
+                  type: 'ADD_ITEM',
+                  payload: {
+                    ...props.duck,
+                    qty: parseInt(amount),
+                  },
                 })
                 console.log(cart)
-              } catch (e) {
-                console.log('Exception')
+              } else {
+                try {
+                  dispatch({
+                    type: 'CART_ADD',
+                    payload: { ...props.duck, qty: parseInt(amount) },
+                  })
+                  console.log(cart)
+                } catch (e) {
+                  console.log('Exception')
+                }
               }
               props.createNotification(
                 Color.success,
