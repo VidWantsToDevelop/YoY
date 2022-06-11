@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ListGroup, ToggleButton } from 'react-bootstrap'
+import {
+  Button,
+  Dropdown,
+  DropdownButton,
+  ListGroup,
+  ToggleButton,
+} from 'react-bootstrap'
+import { CanvasBox } from './Canvas'
 import { States } from '../Context/Context'
 
 const Cart = () => {
@@ -9,14 +16,13 @@ const Cart = () => {
   } = States()
 
   const [total, setTotal] = useState()
+  const [shipping, setShipping] = useState(0)
 
   useEffect(() => {
     setTotal(cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0))
   }, [cart])
 
-  console.log('====================================')
-  console.log(cart)
-  console.log('====================================')
+  const taxRate = 0.13
 
   return (
     <>
@@ -28,7 +34,9 @@ const Cart = () => {
               return (
                 <ListGroup.Item key={el.id}>
                   <div className='cartProducts-product'>
-                    <div className='product-image'>IMAGE</div>
+                    <div className='product-image'>
+                      <CanvasBox duck={el} />
+                    </div>
                     <div className='product-description'>
                       <div className='description-heading'>{el.duckName}</div>
                       <div className='description-chars'>
@@ -86,7 +94,57 @@ const Cart = () => {
             })}
           </ListGroup>
         </div>
-        <div className='cartSummary'>{total}</div>
+        <div className='cartSummary'>
+          <h4 id='cartSummary-heading'>summary</h4>
+          <div className='cartSummary-subtotal'>
+            <div className='subtotal'>
+              <h4>subtotal:</h4>
+              <h4>${total}</h4>
+            </div>
+            <div className='subtotal-shipping'>
+              <div>
+                <h6>estimated shipping & handling</h6>
+                <DropdownButton
+                  title='Dropdown right'
+                  id='dropdown-menu-align-right'
+                  onSelect={(j) => {
+                    setShipping(Number(j))
+                  }}
+                >
+                  <Dropdown.Item eventKey='0'>free shipping ($0)</Dropdown.Item>
+                  <Dropdown.Item eventKey='12.99'>
+                    prime shipping ($12.99)
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey='26.99'>
+                    same day ($26.99)
+                  </Dropdown.Item>
+                </DropdownButton>
+              </div>
+              <h6>${shipping}</h6>
+            </div>
+            <div className='subtotal-tax'>
+              <h4>tax:</h4>
+              <h4>${total * taxRate}</h4>
+            </div>
+          </div>
+          <div className='cartSummary-total'>
+            <h4>Total:</h4>
+            <h4>${total + total * taxRate + shipping}</h4>
+          </div>
+          <div className='cartSummary-checkout'>
+            <button>
+              <span>checkout</span>
+            </button>
+            <button>
+              <span>check out with </span>
+              <img
+                src='https://s3.cointelegraph.com/storage/uploads/view/3278bdc14c74dd4e85732b776d0e5b1d.png'
+                alt='none'
+              />
+            </button>
+          </div>
+        </div>
       </section>
     </>
   )
