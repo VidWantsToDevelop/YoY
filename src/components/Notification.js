@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import Animations from '../Animations.scss'
+import Animations from '../_animations.scss'
 import { createPortal } from 'react-dom'
 
 const createContainer = () => {
