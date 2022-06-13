@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { VscEyeClosed } from 'react-icons/vsc'
 
 const Info = () => {
-  const [isShown, setIsShown] = useState(true)
+  const [isShown, setIsShown] = useState(false)
 
   return (
     <>

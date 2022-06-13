@@ -9,6 +9,7 @@ import { States } from './Context/Context'
 import styles from './App.scss'
 
 import { Html, OrbitControls } from '@react-three/drei'
+import { Pagination } from 'react-bootstrap'
 
 const Main = () => {
   const { state } = States()
@@ -17,6 +18,8 @@ const Main = () => {
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
   const [notifications, setNotifications] = useState([])
+  const [page, setPage] = useState(0)
+  const [amountOfElements, setAmountOfElements] = useState(6)
 
   const createNotification = (color, children) =>
     setNotifications([
@@ -28,6 +31,13 @@ const Main = () => {
   const deleteNotification = (key) => {
     setNotifications(notifications.filter(({ id, color }) => id !== key))
   }
+
+  //Pagination
+  const currentPosts = state.products.slice(
+    page * amountOfElements,
+    page * amountOfElements + amountOfElements
+  )
+  console.log(currentPosts)
 
   const modalHandler = (e, duck) => {
     if (e) {
@@ -59,8 +69,9 @@ const Main = () => {
         )
       })}
       <div className='canvasArea-div'>
-        {state.products.map((el, index) => {
+        {currentPosts.map((el, index) => {
           let { id, duckName, description, model, price } = el
+
           return (
             <CanvasArea
               duckName={duckName}
@@ -78,8 +89,74 @@ const Main = () => {
           )
         })}
       </div>
+      <Pagination>
+        <Pagination.First />
+        <Pagination.Prev />
+        <Pagination.Ellipsis />
+
+        <Pagination.Item
+          style={{ display: page ? 'block' : 'none' }}
+          onClick={(e) => {
+            setPage(page - 1)
+          }}
+        >
+          {page}
+        </Pagination.Item>
+        <Pagination.Item
+          active
+          onClick={(e) => {
+            paginatorEvents('item', e)
+            setPage(page)
+          }}
+        >
+          {page + 1}
+        </Pagination.Item>
+        <Pagination.Item
+          style={{
+            display:
+              page + 1 < state.products.length / amountOfElements
+                ? 'block'
+                : 'none',
+          }}
+          onClick={(e) => {
+            paginatorEvents('item', e)
+            setPage(page + 1)
+          }}
+        >
+          {page + 2}
+        </Pagination.Item>
+        <Pagination.Item
+          style={{
+            display:
+              page + 2 < state.products.length / amountOfElements
+                ? 'block'
+                : 'none',
+          }}
+          onClick={(e) => {
+            paginatorEvents('item', e)
+            setPage(page + 2)
+          }}
+        >
+          {page + 3}
+        </Pagination.Item>
+
+        <Pagination.Ellipsis />
+        <Pagination.Next />
+        <Pagination.Last />
+      </Pagination>
     </main>
   )
+}
+
+//Functions
+const paginatorEvents = (type, event) => {
+  const currentActive = document.querySelector('.page-item.active')
+  switch (type) {
+    case 'item':
+
+    default:
+      console.log('Log')
+  }
 }
 
 export default Main
