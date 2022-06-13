@@ -155,7 +155,6 @@ const paginatorEvents = (type, event) => {
     case 'item':
 
     default:
-      console.log('Log')
   }
 }
 
