@@ -46,9 +46,29 @@ const Modal = (props) => {
                 <OrbitControls />
               </Canvas>
             </div>
+            <div className='modal-leftSide-secondPart'>
+              <div className='duckIcon-container'>
+                <img
+                  src='./textures/duck.png'
+                  alt='duck-icon'
+                  height='30'
+                  width='30'
+                  onClick={(e) => {
+                    alert(
+                      "Don't worry it is just an attribution to the author of this icon (thank you monkik)"
+                    )
+                    window.open(
+                      'https://www.flaticon.com/free-icon/duck_2219737'
+                    )
+                  }}
+                />
+              </div>
+              <p>Don't forget, you can rotate your duck</p>
+            </div>
           </div>
           <div className='modal-rightSide'>
             <div className='modal-description'>
+              <h3>{props.duck.duckName}</h3>
               <p className='duck-description'>{props.duck.description}</p>
             </div>
             <div className='modal-purchase'>

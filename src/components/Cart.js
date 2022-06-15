@@ -41,7 +41,7 @@ const Cart = () => {
                       <div className='description-heading'>{el.duckName}</div>
                       <div className='description-chars'>
                         <div className='description-char'>
-                          <p>Description:</p> <span>{el.description}</span>
+                          <p>Description:</p> <span>{el.description} </span>
                         </div>
                         <div className='description-char'>
                           <p>Price:</p> <span>{el.price}</span>

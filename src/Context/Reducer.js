@@ -34,6 +34,15 @@ const reducer = (state, action) => {
         cart: state.cart.filter((c) => c.id !== action.payload.id),
       }
 
+    case 'SET_PAGE':
+      console.log('====================================')
+      console.log('triggered')
+      console.log('====================================')
+      return {
+        ...state,
+        allStates: { ...state.allStates, page: action.payload },
+      }
+
     default:
       return state
   }

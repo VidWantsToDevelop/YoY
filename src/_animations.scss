@@ -3,6 +3,41 @@
   --shadow-color-light: rgb(255, 230, 0);
 }
 
+@keyframes shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(2deg);
+  }
+
+  50% {
+    transform: rotate(-2deg);
+  }
+
+  80% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(359deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
 @keyframes in {
   from {
     transform: translateX(100%);

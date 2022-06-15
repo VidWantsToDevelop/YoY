@@ -14,12 +14,18 @@ import { Pagination } from 'react-bootstrap'
 const Main = () => {
   const { state } = States()
 
+  //Slice pages
+  let page = state.allStates.page
+  let amountOfElements = state.allStates.amountOfElements
+  const currentPosts = state.products.slice(
+    page * amountOfElements,
+    page * amountOfElements + amountOfElements
+  )
+
   console.log(state['products'])
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
   const [notifications, setNotifications] = useState([])
-  const [page, setPage] = useState(0)
-  const [amountOfElements, setAmountOfElements] = useState(6)
 
   const createNotification = (color, children) =>
     setNotifications([
@@ -31,13 +37,6 @@ const Main = () => {
   const deleteNotification = (key) => {
     setNotifications(notifications.filter(({ id, color }) => id !== key))
   }
-
-  //Pagination
-  const currentPosts = state.products.slice(
-    page * amountOfElements,
-    page * amountOfElements + amountOfElements
-  )
-  console.log(currentPosts)
 
   const modalHandler = (e, duck) => {
     if (e) {
@@ -89,73 +88,99 @@ const Main = () => {
           )
         })}
       </div>
-      <Pagination>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Ellipsis />
-
-        <Pagination.Item
-          style={{ display: page ? 'block' : 'none' }}
-          onClick={(e) => {
-            setPage(page - 1)
-          }}
-        >
-          {page}
-        </Pagination.Item>
-        <Pagination.Item
-          active
-          onClick={(e) => {
-            paginatorEvents('item', e)
-            setPage(page)
-          }}
-        >
-          {page + 1}
-        </Pagination.Item>
-        <Pagination.Item
-          style={{
-            display:
-              page + 1 < state.products.length / amountOfElements
-                ? 'block'
-                : 'none',
-          }}
-          onClick={(e) => {
-            paginatorEvents('item', e)
-            setPage(page + 1)
-          }}
-        >
-          {page + 2}
-        </Pagination.Item>
-        <Pagination.Item
-          style={{
-            display:
-              page + 2 < state.products.length / amountOfElements
-                ? 'block'
-                : 'none',
-          }}
-          onClick={(e) => {
-            paginatorEvents('item', e)
-            setPage(page + 2)
-          }}
-        >
-          {page + 3}
-        </Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
+      <Paginator />
     </main>
   )
 }
 
-//Functions
-const paginatorEvents = (type, event) => {
-  const currentActive = document.querySelector('.page-item.active')
-  switch (type) {
-    case 'item':
+const Paginator = () => {
+  const { state, dispatch } = States()
 
-    default:
-  }
+  const setPage = state.allStates.page[1]
+  const page = state.allStates.page
+  const amountOfElements = state.allStates.amountOfElements
+
+  //Pagination
+  const currentPosts = state.products.slice(
+    state.allStates.page.page *
+      state.allStates.amountOfElements.amountOfElements,
+    state.allStates.page.page *
+      state.allStates.amountOfElements.amountOfElements +
+      state.allStates.amountOfElements.amountOfElements
+  )
+
+  return (
+    <Pagination>
+      <Pagination.First
+        onClick={() => {
+          dispatch({ type: 'SET_PAGE', payload: 0 })
+        }}
+      />
+      <Pagination.Prev
+        onClick={(e) => {
+          if (page > 0) {
+            dispatch({ type: 'SET_PAGE', payload: page - 1 })
+          } else {
+            console.log('lower limit')
+          }
+        }}
+      />
+
+      <Pagination.Item
+        style={{ display: page ? 'block' : 'none' }}
+        onClick={(e) => {
+          dispatch({ type: 'SET_PAGE', payload: page - 1 })
+        }}
+      >
+        {page}
+      </Pagination.Item>
+      <Pagination.Item active>{page + 1}</Pagination.Item>
+      <Pagination.Item
+        style={{
+          display:
+            page + 1 < state.products.length / amountOfElements
+              ? 'block'
+              : 'none',
+        }}
+        onClick={(e) => {
+          dispatch({ type: 'SET_PAGE', payload: page + 1 })
+        }}
+      >
+        {page + 2}
+      </Pagination.Item>
+      <Pagination.Item
+        style={{
+          display:
+            page + 2 < state.products.length / amountOfElements
+              ? 'block'
+              : 'none',
+        }}
+        onClick={(e) => {
+          dispatch({ type: 'SET_PAGE', payload: page + 2 })
+        }}
+      >
+        {page + 3}
+      </Pagination.Item>
+
+      <Pagination.Next
+        onClick={(e) => {
+          if (page + 1 < state.products.length / amountOfElements) {
+            dispatch({ type: 'SET_PAGE', payload: page + 1 })
+          } else {
+            console.log('upper limit')
+          }
+        }}
+      />
+      <Pagination.Last
+        onClick={() => {
+          dispatch({
+            type: 'SET_PAGE',
+            payload: state.products.length / amountOfElements - 1,
+          })
+        }}
+      />
+    </Pagination>
+  )
 }
 
 export default Main

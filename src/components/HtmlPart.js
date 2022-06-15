@@ -26,6 +26,7 @@ const HtmlPart = (props) => {
           ref={refGroup}
           position={[40, 0, 0]}
           rotation={[0.25, 0, 0]}
+          scale={1}
         >
           {props.component}
         </mesh>
