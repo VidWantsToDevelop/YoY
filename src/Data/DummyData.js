@@ -1,6 +1,10 @@
 import Subary from '../components/Subary'
 import PostDuck from '../components/PostDuck'
 import HappyDuck from '../components/HappyDuck'
+import ClayDuck from '../ducks/ClayDuck'
+import RubberDuck from '../ducks/RubberDuck'
+import RegularDuck from '../ducks/RegularDuck'
+import MollyTheDuckling from '../ducks/MollyTheDuckling'
 
 const Data = [
   {
@@ -20,31 +24,31 @@ const Data = [
   },
   {
     id: 2,
-    duckName: 'Subary',
+    duckName: 'Clay Duck',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <ClayDuck />,
     price: 550,
   },
   {
     id: 3,
-    duckName: 'Happy duck',
+    duckName: 'Rubber Duck',
     description: 'Sincerely happy duck',
-    model: <HappyDuck />,
+    model: <RubberDuck />,
     price: 150,
   },
   {
     id: 4,
-    duckName: 'Post Duck',
+    duckName: 'Regular Duck',
     description:
       'A great example of the hard-working duck. This duck wakes up early in the morning to deliver all the letters to the other citizens of the DuckVille. Unlike other ducks, Post Duck is always in a great mood and ready to help others.',
-    model: <PostDuck />,
+    model: <RegularDuck />,
     price: 250,
   },
   {
     id: 5,
-    duckName: 'Subary',
+    duckName: 'Molly the "Duckling"',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <MollyTheDuckling />,
     price: 550,
   },
   {
@@ -64,31 +68,31 @@ const Data = [
   },
   {
     id: 8,
-    duckName: 'Subary',
+    duckName: 'Clay Duck',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <ClayDuck />,
     price: 550,
   },
   {
     id: 9,
-    duckName: 'Happy duck',
+    duckName: 'Rubber Duck',
     description: 'Sincerely happy duck',
-    model: <HappyDuck />,
+    model: <RubberDuck />,
     price: 150,
   },
   {
     id: 10,
-    duckName: 'Post Duck',
+    duckName: 'Regular Duck',
     description:
       'A great example of the hard-working duck. This duck wakes up early in the morning to deliver all the letters to the other citizens of the DuckVille. Unlike other ducks, Post Duck is always in a great mood and ready to help others.',
-    model: <PostDuck />,
+    model: <RegularDuck />,
     price: 250,
   },
   {
     id: 11,
-    duckName: 'Subary',
+    duckName: 'Molly the "Duckling"',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <MollyTheDuckling />,
     price: 550,
   },
   {
@@ -108,31 +112,31 @@ const Data = [
   },
   {
     id: 14,
-    duckName: 'Subary',
+    duckName: 'Clay Duck',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <ClayDuck />,
     price: 550,
   },
   {
     id: 15,
-    duckName: 'Happy duck',
+    duckName: 'Rubber Duck',
     description: 'Sincerely happy duck',
-    model: <HappyDuck />,
+    model: <RubberDuck />,
     price: 150,
   },
   {
     id: 16,
-    duckName: 'Post Duck',
+    duckName: 'Regular Duck',
     description:
       'A great example of the hard-working duck. This duck wakes up early in the morning to deliver all the letters to the other citizens of the DuckVille. Unlike other ducks, Post Duck is always in a great mood and ready to help others.',
-    model: <PostDuck />,
+    model: <RegularDuck />,
     price: 250,
   },
   {
     id: 17,
-    duckName: 'Subary',
+    duckName: 'Molly the "Duckling"',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <MollyTheDuckling />,
     price: 550,
   },
   {
@@ -152,31 +156,31 @@ const Data = [
   },
   {
     id: 20,
-    duckName: 'Subary',
+    duckName: 'Clay Duck',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <ClayDuck />,
     price: 550,
   },
   {
     id: 21,
-    duckName: 'Happy duck',
+    duckName: 'Rubber Duck',
     description: 'Sincerely happy duck',
-    model: <HappyDuck />,
+    model: <RubberDuck />,
     price: 150,
   },
   {
     id: 22,
-    duckName: 'Post Duck',
+    duckName: 'Regular Duck',
     description:
       'A great example of the hard-working duck. This duck wakes up early in the morning to deliver all the letters to the other citizens of the DuckVille. Unlike other ducks, Post Duck is always in a great mood and ready to help others.',
-    model: <PostDuck />,
+    model: <RegularDuck />,
     price: 250,
   },
   {
     id: 23,
-    duckName: 'Subary',
+    duckName: 'Molly the "Duckling"',
     description: 'Probably, the coolest duck you will ever see',
-    model: <Subary />,
+    model: <MollyTheDuckling />,
     price: 550,
   },
 ]
