@@ -27,7 +27,7 @@ const Notification = ({ color = Color.info, deleteMethod, children }) => {
   const [closing, setClosing] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setClosing(true), 505000)
+    const timeout = setTimeout(() => setClosing(true), 3000)
 
     return () => {
       clearTimeout(timeout)

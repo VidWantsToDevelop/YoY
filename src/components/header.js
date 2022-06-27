@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { States } from '../Context/Context'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineShoppingCart as CartIcon } from 'react-icons/ai'
 import { RiDeleteBack2Line } from 'react-icons/ri'
+import { FaArrowCircleLeft } from 'react-icons/fa'
+
 import * as RB from 'react-bootstrap'
 
 export default function Header() {
@@ -11,14 +13,27 @@ export default function Header() {
     dispatch,
   } = States()
 
+  let location = useLocation()
+
   return (
     <header>
       <div className='header-inner'>
         <nav>
+          {location.pathname.includes('cart') ? (
+            <Link to='/'>
+              <button className='btn home-btn'>
+                <FaArrowCircleLeft />
+                <p>Back</p>
+              </button>
+            </Link>
+          ) : (
+            void 0
+          )}
+
           <ul>
             <li>
               <div class='logo logo-holder logo-4'>
-                <a href=''>
+                <a href='https://david-boldyrev-pfolio.netlify.app/'>
                   <h3>David</h3>
                   <p>just trying my best</p>
                 </a>
@@ -59,7 +74,13 @@ export default function Header() {
                   ) : (
                     <span style={{ padding: '25px' }}>Cart is empty</span>
                   )}
-                  {cart.length ? <button>Proceed to checkout</button> : void 1}
+                  {cart.length ? (
+                    <Link to='/cart'>
+                      <button>PROCEED TO CHECKOUT</button>
+                    </Link>
+                  ) : (
+                    void 1
+                  )}
                 </RB.Dropdown.Menu>
               </RB.Dropdown>
             </RB.Container>

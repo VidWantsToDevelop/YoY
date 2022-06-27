@@ -125,18 +125,18 @@ const Cart = () => {
             </div>
             <div className='subtotal-tax'>
               <h4>tax:</h4>
-              <h4>${total * taxRate}</h4>
+              <h4>${(total * taxRate).toFixed(2)}</h4>
             </div>
           </div>
           <div className='cartSummary-total'>
             <h4>Total:</h4>
-            <h4>${total + total * taxRate + shipping}</h4>
+            <h4>${(total + total * taxRate + shipping).toFixed(2)}</h4>
           </div>
           <div className='cartSummary-checkout'>
-            <button>
+            <button onClick={() => message()}>
               <span>checkout</span>
             </button>
-            <button>
+            <button onClick={() => message()}>
               <span>check out with </span>
               <img
                 src='https://s3.cointelegraph.com/storage/uploads/view/3278bdc14c74dd4e85732b776d0e5b1d.png'
@@ -147,6 +147,12 @@ const Cart = () => {
         </div>
       </section>
     </>
+  )
+}
+
+const message = () => {
+  alert(
+    'Hi there, as I have already written in the "TIP" component, you can not really buy duck. Despite this disheartening fact, I hope you had a great experience. Cheers 🍻'
   )
 }
 
