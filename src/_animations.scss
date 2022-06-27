@@ -1,0 +1,102 @@
+:root {
+  --shadow-color: #e5961f;
+  --shadow-color-light: rgb(255, 230, 0);
+}
+
+@keyframes shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(2deg);
+  }
+
+  50% {
+    transform: rotate(-2deg);
+  }
+
+  80% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(359deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes out {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
+
+@mixin neon {
+  @keyframes neon {
+    0% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light),
+        -1px 1px 1px var(--shadow-color-light),
+        1px -1px 1px var(--shadow-color-light),
+        1px 1px 1px var(--shadow-color-light), 0 0 3px var(--shadow-color-light),
+        0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+        0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color),
+        0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color),
+        0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+    }
+    50% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light),
+        -1px 1px 1px var(--shadow-color-light),
+        1px -1px 1px var(--shadow-color-light),
+        1px 1px 1px var(--shadow-color-light), 0 0 5px var(--shadow-color-light),
+        0 0 15px var(--shadow-color-light), 0 0 25px var(--shadow-color-light),
+        0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color),
+        0 0 60px var(--shadow-color), 0 0 80px var(--shadow-color),
+        0 0 110px var(--shadow-color), 0 0 210px var(--shadow-color);
+    }
+    100% {
+      text-shadow: -1px -1px 1px var(--shadow-color-light),
+        -1px 1px 1px var(--shadow-color-light),
+        1px -1px 1px var(--shadow-color-light),
+        1px 1px 1px var(--shadow-color-light), 0 0 3px var(--shadow-color-light),
+        0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+        0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color),
+        0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color),
+        0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+    }
+  }
+}
+
+.notification.in {
+  animation: in 0.3s ease-in-out;
+}
+
+.notification.out {
+  transform: translateX(150%);
+  flex: 0;
+}

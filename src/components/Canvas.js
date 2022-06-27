@@ -4,10 +4,16 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import Lights from './Lights'
 import { Notification, Color } from './Notification'
 
-import { Html, OrbitControls, useProgress } from '@react-three/drei'
-import { render } from '@testing-library/react'
+import { Html, useProgress } from '@react-three/drei'
+
+import { States } from '../Context/Context'
 
 function CanvasArea(props) {
+  const {
+    state: { cart },
+    dispatch,
+  } = States()
+
   return (
     <div className='canvasArea'>
       <div className='canvasWrapper'>
@@ -17,20 +23,23 @@ function CanvasArea(props) {
         <h1 className='title'>{props.duckName}</h1>
         <div className='amountBar'>
           <div>
-            <h5 className='amountManage' onClick={(e) => manageAmount(e, true)}>
+            <div
+              className='amountManage'
+              onClick={(e) => manageAmount(e, true)}
+            >
               -
-            </h5>
+            </div>
           </div>
-          <p className='counter' id={`counter_${props.index}`}>
+          <div className='counter' id={`counter_${props.index}`}>
             0
-          </p>
+          </div>
           <div>
-            <h5
+            <div
               className='amountManage'
               onClick={(e) => manageAmount(e, false)}
             >
               +
-            </h5>
+            </div>
           </div>
         </div>
         <button
@@ -39,9 +48,29 @@ function CanvasArea(props) {
               '#counter_' + props.index
             ).innerText
             if (amount != 0) {
+              if (cart.filter((el) => el.duckName === props.duckName).length) {
+                dispatch({
+                  type: 'ADD_ITEM',
+                  payload: {
+                    ...props.duck,
+                    qty: parseInt(amount),
+                  },
+                })
+                console.log(cart)
+              } else {
+                try {
+                  dispatch({
+                    type: 'CART_ADD',
+                    payload: { ...props.duck, qty: parseInt(amount) },
+                  })
+                  console.log(cart)
+                } catch (e) {
+                  console.log('Exception')
+                }
+              }
               props.createNotification(
                 Color.success,
-                `${amount}x ${props.duck.duckName} have been added to your cart`
+                `${amount}x ${props.duckName} have been added to your cart`
               )
             } else {
               props.createNotification(Color.error, `Invalid amount of items`)
@@ -57,14 +86,10 @@ function CanvasArea(props) {
 }
 
 const CanvasBox = (props) => {
-  const ref = useRef()
-
   return (
     <section
       onClick={(e) => {
         props.duck.handler(null, props.duck)
-
-        render()
       }}
     >
       <Canvas

@@ -5,9 +5,14 @@ import { OrbitControls } from '@react-three/drei'
 
 import { Loading } from './Canvas'
 import Lights from './Lights'
+import { States } from '../Context/Context'
 
 const Modal = (props) => {
-  console.log(props)
+  const {
+    state: { cart },
+    dispatch,
+  } = States()
+
   return (
     <>
       <div
@@ -41,36 +46,82 @@ const Modal = (props) => {
                 <OrbitControls />
               </Canvas>
             </div>
+            <div className='modal-leftSide-secondPart'>
+              <div className='duckIcon-container'>
+                <img
+                  src='./textures/duck.png'
+                  alt='duck-icon'
+                  height='30'
+                  width='30'
+                  onClick={(e) => {
+                    alert(
+                      "Don't worry it is just an attribution to the author of this icon (thank you monkik)"
+                    )
+                    window.open(
+                      'https://www.flaticon.com/free-icon/duck_2219737'
+                    )
+                  }}
+                />
+              </div>
+              <p>Don't forget, you can rotate your duck</p>
+            </div>
           </div>
           <div className='modal-rightSide'>
             <div className='modal-description'>
+              <h3>{props.duck.duckName}</h3>
               <p className='duck-description'>{props.duck.description}</p>
             </div>
             <div className='modal-purchase'>
               <div className='amountBar'>
                 <div>
-                  <h5
+                  <div
                     className='amountManage'
                     onClick={(e) => manageAmount(e, true)}
                   >
                     -
-                  </h5>
+                  </div>
                 </div>
-                <p className='counter-modal'>0</p>
+                <div className='counter' id={`counter_${props.index}`}>
+                  0
+                </div>
                 <div>
-                  <h5
+                  <div
                     className='amountManage'
                     onClick={(e) => manageAmount(e, false)}
                   >
                     +
-                  </h5>
+                  </div>
                 </div>
               </div>
               <button
                 onClick={(e) => {
-                  const amount =
-                    document.querySelector('.counter-modal').innerText
+                  const amount = document.querySelector(
+                    '#counter_' + props.index
+                  ).innerText
                   if (amount != 0) {
+                    if (
+                      cart.filter((el) => el.duckName === props.duck.duckName)
+                        .length
+                    ) {
+                      dispatch({
+                        type: 'ADD_ITEM',
+                        payload: {
+                          ...props.duck,
+                          qty: parseInt(amount),
+                        },
+                      })
+                      console.log(cart)
+                    } else {
+                      try {
+                        dispatch({
+                          type: 'CART_ADD',
+                          payload: { ...props.duck, qty: parseInt(amount) },
+                        })
+                        console.log(cart)
+                      } catch (e) {
+                        console.log('Exception')
+                      }
+                    }
                     props.createNotification(
                       'success',
                       `${amount}x ${props.duck.duckName} have been added to your cart`
@@ -79,6 +130,7 @@ const Modal = (props) => {
                     props.createNotification('error', `Invalid amount of items`)
                   }
                 }}
+                id={`button_${props.index}`}
               >
                 Add to cart
               </button>
