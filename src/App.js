@@ -9,7 +9,6 @@ function App() {
   return (
     <RR.BrowserRouter>
       <Header />
-
       <RR.Routes>
         <RR.Route path='/' exact element={<Main />} />
         <RR.Route path='/cart' exact element={<Cart />} />

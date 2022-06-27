@@ -15,6 +15,8 @@ export default function Header() {
 
   let location = useLocation()
 
+  initialMessage()
+
   return (
     <header>
       <div className='header-inner'>
@@ -88,5 +90,11 @@ export default function Header() {
         </nav>
       </div>
     </header>
+  )
+}
+
+const initialMessage = () => {
+  alert(
+    'Welcome! Before we start, I will ask you to wait for all duck models to be loaded and then you are good to go (it may take some time as all these models are rendered in the 3D with the high resolution :) P.S. Have a great day/evening! )'
   )
 }
