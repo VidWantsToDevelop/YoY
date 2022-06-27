@@ -6,10 +6,8 @@ import { createPortal } from 'react-dom'
 const createContainer = () => {
   const portalId = 'notifyContainer'
   let element = document.getElementById(portalId)
-  console.log(element)
 
   if (element) {
-    console.log(2)
     return element
   }
 
@@ -17,7 +15,7 @@ const createContainer = () => {
   element.setAttribute('id', portalId)
   element.className = 'containerN'
   document.body.appendChild(element)
-  console.log(3)
+
   return element
 }
 

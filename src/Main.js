@@ -22,7 +22,6 @@ const Main = () => {
     page * amountOfElements + amountOfElements
   )
 
-  console.log(state['products'])
   const [modalIsShown, setIsShown] = useState(false)
   const [modalModel, setModel] = useState(null)
   const [notifications, setNotifications] = useState([])
@@ -32,7 +31,6 @@ const Main = () => {
       ...notifications,
       { color, id: notifications.length, children },
     ])
-  console.log(notifications)
 
   const deleteNotification = (key) => {
     setNotifications(notifications.filter(({ id, color }) => id !== key))
@@ -42,7 +40,6 @@ const Main = () => {
     if (e) {
       if (e.target === e.currentTarget) setIsShown(!modalIsShown)
     } else {
-      console.log('handler')
       setModel(duck)
       setIsShown(!modalIsShown)
     }

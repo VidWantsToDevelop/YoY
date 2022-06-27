@@ -15,8 +15,6 @@ export default function Header() {
 
   let location = useLocation()
 
-  initialMessage()
-
   return (
     <header>
       <div className='header-inner'>
@@ -34,7 +32,7 @@ export default function Header() {
 
           <ul>
             <li>
-              <div class='logo logo-holder logo-4'>
+              <div className='logo logo-holder logo-4'>
                 <a href='https://david-boldyrev-pfolio.netlify.app/'>
                   <h3>David</h3>
                   <p>just trying my best</p>
@@ -61,8 +59,6 @@ export default function Header() {
                             <h5>${el.price * el.qty}</h5>
                             <RiDeleteBack2Line
                               onClick={() => {
-                                console.log("'((((((' + ")
-                                console.log(cart)
                                 dispatch({
                                   type: 'CART_REMOVE',
                                   payload: el,
@@ -90,11 +86,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  )
-}
-
-const initialMessage = () => {
-  alert(
-    'Welcome! Before we start, I will ask you to wait for all duck models to be loaded and then you are good to go (it may take some time as all these models are rendered in the 3D with the high resolution :) P.S. Have a great day/evening! )'
   )
 }
