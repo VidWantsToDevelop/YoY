@@ -35,9 +35,6 @@ const reducer = (state, action) => {
       }
 
     case 'SET_PAGE':
-      console.log('====================================')
-      console.log('triggered')
-      console.log('====================================')
       return {
         ...state,
         allStates: { ...state.allStates, page: action.payload },

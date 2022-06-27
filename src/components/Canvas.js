@@ -56,14 +56,12 @@ function CanvasArea(props) {
                     qty: parseInt(amount),
                   },
                 })
-                console.log(cart)
               } else {
                 try {
                   dispatch({
                     type: 'CART_ADD',
                     payload: { ...props.duck, qty: parseInt(amount) },
                   })
-                  console.log(cart)
                 } catch (e) {
                   console.log('Exception')
                 }
@@ -137,7 +135,6 @@ const addToCart = (e, notificationsP) => {
   document.querySelector('.notifications').style.display = 'flex'
 
   const key = new Date().getTime().toString()
-  console.log(key)
 
   setNotifications(
     notifications.concat(

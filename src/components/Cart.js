@@ -50,7 +50,6 @@ const Cart = () => {
                       <div className='description-btns'>
                         <Button
                           onClick={(e) => {
-                            console.log('world')
                             dispatch({
                               type: 'CART_REMOVE',
                               payload: el,

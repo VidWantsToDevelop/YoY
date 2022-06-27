@@ -110,14 +110,12 @@ const Modal = (props) => {
                           qty: parseInt(amount),
                         },
                       })
-                      console.log(cart)
                     } else {
                       try {
                         dispatch({
                           type: 'CART_ADD',
                           payload: { ...props.duck, qty: parseInt(amount) },
                         })
-                        console.log(cart)
                       } catch (e) {
                         console.log('Exception')
                       }
